@@ -7,3 +7,19 @@ export async function fetchAvailablePlaces() {
 
   return resData.places;
 }
+
+export async function updateUserPlaces(places) {
+  fetch("http://localhost:3000/user-places", {
+    method: "PUT",
+    body: JSON.stringify({ places }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error(resData.message || "Failed to update places.");
+  }
+  return resData.message;
+}
